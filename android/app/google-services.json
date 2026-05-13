@@ -13,7 +13,20 @@
           "package_name": "com.neurotrap.ids"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "390925180067-vet7sp5oto5pfs6lsjn01s1jh4vso6rb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.neurotrap.ids",
+            "certificate_hash": "349ec81b18c5873b18f161b41238748b9d45934a"
+          }
+        },
+        {
+          "client_id": "390925180067-vs8h96ev7i9kn32buotfhnai61vq8ttr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA_h5cjC5ad09PU-Tbv8k-L93ecV1kChlk"
@@ -21,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "390925180067-vs8h96ev7i9kn32buotfhnai61vq8ttr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
