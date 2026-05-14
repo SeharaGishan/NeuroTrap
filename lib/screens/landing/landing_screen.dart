@@ -71,7 +71,7 @@ class _LandingScreenState extends State<LandingScreen>
             children: [
               Center(
                 child: Padding(
-                  padding: EdgeInsets.only(bottom: size.height * 0.12),
+                  padding: EdgeInsets.only(bottom: size.height * 0.2),
                   child: AnimatedBuilder(
                     animation: _controller,
                     builder: (_, _) => FadeTransition(
@@ -79,7 +79,7 @@ class _LandingScreenState extends State<LandingScreen>
                       child: ScaleTransition(
                         scale: _logoScale,
                         child: Image.asset(
-                          'assets/images/logo.png',
+                          'assets/images/main-logo.png',
                           width: size.width * 1.4,
                         ),
                       ),

@@ -5,12 +5,17 @@ import 'screens/landing/landing_screen.dart';
 import 'screens/auth/sign_in_screen.dart';
 import 'screens/auth/sign_up_screen.dart';
 import 'screens/auth/verification_screen.dart';
+import 'screens/home/home_screen.dart';
+import 'screens/vpn/vpn_screen.dart';
+import 'screens/threat_alert/threat_alert_screen.dart';
+import 'services/notification_service.dart';
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await NotificationService.initialize(navigatorKey);
   runApp(const NeuroTrapApp());
 }
 
@@ -21,6 +26,7 @@ class NeuroTrapApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'NeuroTrap',
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
@@ -29,69 +35,28 @@ class NeuroTrapApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const LandingScreen(),
-        '/sign-in': (context) => const SignInScreen(),
-        '/sign-up': (context) => const SignUpScreen(),
-        '/verify': (context) => const VerificationScreen(),
-        // '/home' will be added when Home screen is built
-        '/home': (context) => const _TempHomeScreen(),
+        '/':        (ctx) => const LandingScreen(),
+        '/sign-in': (ctx) => const SignInScreen(),
+        '/sign-up': (ctx) => const SignUpScreen(),
+        '/verify':  (ctx) => const VerificationScreen(),
+        '/vpn':     (ctx) => const VpnScreen(),
+        '/home':    (ctx) => const HomeScreen(),
       },
-    );
-  }
-}
-
-// ── Temporary home screen placeholder until Home is built ─────────────────────
-class _TempHomeScreen extends StatelessWidget {
-  const _TempHomeScreen();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF000319),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(
-              Icons.security_rounded,
-              color: Color(0xFF00B3FF),
-              size: 64,
+      onGenerateRoute: (settings) {
+        if (settings.name == '/alert') {
+          final args = (settings.arguments as Map<String, dynamic>?) ?? {};
+          return MaterialPageRoute(
+            fullscreenDialog: true,
+            builder: (_) => ThreatAlertScreen(
+              classification: args['classification'] ?? 'script_kiddie',
+              sourceIp:       args['src_ip'] ?? '--',
+              confidence:     (args['confidence'] as num?)?.toDouble() ?? 0.0,
+              dqnAction:      args['dqn_action'] ?? '--',
             ),
-            const SizedBox(height: 20),
-            const Text(
-              'NEUROTRAP',
-              style: TextStyle(
-                fontFamily: 'KdamThmorPro',
-                fontSize: 24,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-                letterSpacing: 6,
-              ),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              '✅ Verified & Signed In',
-              style: TextStyle(
-                fontFamily: 'KdamThmorPro',
-                fontSize: 14,
-                color: Color(0xFF4CAF50),
-                letterSpacing: 1,
-              ),
-            ),
-            const SizedBox(height: 40),
-            TextButton(
-              onPressed: () => Navigator.pushReplacementNamed(context, '/'),
-              child: const Text(
-                'Sign Out',
-                style: TextStyle(
-                  fontFamily: 'KdamThmorPro',
-                  color: Color(0xFFEF5350),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+          );
+        }
+        return null;
+      },
     );
   }
 }

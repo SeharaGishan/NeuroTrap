@@ -141,7 +141,7 @@ class _VerificationScreenState extends State<VerificationScreen>
         // Navigate to home — replace entire stack
         Navigator.pushNamedAndRemoveUntil(
           context,
-          '/home',
+          '/vpn',
           (route) => false,
         );
       }
