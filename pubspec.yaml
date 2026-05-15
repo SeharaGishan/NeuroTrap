@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
   go_router: ^14.2.7
   cloud_firestore: ^5.6.0
+  http: ^1.6.0
 
   # Firebase
   firebase_core: ^3.6.0
@@ -35,21 +36,25 @@ dependencies:
   # Utils
   intl: ^0.19.0
   shared_preferences: ^2.3.2
-  permission_handler: ^11.3.1
-  url_launcher: ^6.3.0
+  permission_handler: ^12.0.1
+  url_launcher: ^6.3.2
   package_info_plus: ^8.0.2
-  connectivity_plus: ^6.0.5
+  connectivity_plus: ^7.1.1
 
   # Notifications
   flutter_local_notifications: ^17.2.3
 
   # Icons
   cupertino_icons: ^1.0.8
+  path_provider: ^2.1.5
+  audioplayers: ^6.6.0
+  flutter_foreground_task: ^9.2.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
 
 flutter:
   uses-material-design: true
@@ -57,8 +62,19 @@ flutter:
   assets:
     - assets/images/
     - assets/fonts/
+    - assets/vpn/
+    - assets/audio/
+    - assets/vpn/
+    - assets/audio/
 
   fonts:
     - family: KdamThmorPro
       fonts:
         - asset: assets/fonts/KdamThmorPro-Regular.ttf
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/images/app_icon.png"
+  min_sdk_android: 23
+  adaptive_icon_background: "#0A1628"
+  adaptive_icon_foreground: "assets/images/app_icon.png"

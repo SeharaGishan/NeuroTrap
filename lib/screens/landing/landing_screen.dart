@@ -71,16 +71,16 @@ class _LandingScreenState extends State<LandingScreen>
             children: [
               Center(
                 child: Padding(
-                  padding: EdgeInsets.only(bottom: size.height * 0.12),
+                  padding: EdgeInsets.only(bottom: size.height * 0.2),
                   child: AnimatedBuilder(
                     animation: _controller,
-                    builder: (_, __) => FadeTransition(
+                    builder: (_, _) => FadeTransition(
                       opacity: _logoFade,
                       child: ScaleTransition(
                         scale: _logoScale,
                         child: Image.asset(
-                          'assets/images/logo.png',
-                          width: size.width * 1.4,
+                          'assets/images/main-logo.png',
+                          width: size.width * 0.88,
                         ),
                       ),
                     ),
@@ -93,7 +93,7 @@ class _LandingScreenState extends State<LandingScreen>
                 right: 0,
                 child: AnimatedBuilder(
                   animation: _controller,
-                  builder: (_, __) => FadeTransition(
+                  builder: (_, _) => FadeTransition(
                     opacity: _buttonFade,
                     child: Center(child: _GlassStartButton()),
                   ),

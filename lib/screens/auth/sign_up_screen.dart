@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../core/services/auth_service.dart';
 import '../../core/services/firestore_service.dart';
+import '../../core/services/otp_service.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -71,7 +72,14 @@ class _SignUpScreenState extends State<SignUpScreen>
         username: _usernameController.text.trim(),
       );
 
-      // 3 — Navigate to verification screen
+      // 3 - Send OTP
+      await OtpService().sendOtp(
+          uid: credential.user!.uid,
+          email: _emailController.text.trim(),
+          username: _usernameController.text.trim(),
+      );
+
+      // 4 — Navigate to verification screen
       if (mounted) {
         Navigator.pushReplacementNamed(
           context,

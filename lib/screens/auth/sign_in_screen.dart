@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../core/services/auth_service.dart';
+import '../../core/services/otp_service.dart';
+import '../../core/services/firestore_service.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -46,20 +48,50 @@ class _SignInScreenState extends State<SignInScreen>
   }
 
   Future<void> _signIn() async {
-    setState(() => _errorMessage = null);
-    if (!_formKey.currentState!.validate()) return;
-    setState(() => _isLoading = true);
-    try {
-      await _authService.signIn(
-        email: _emailController.text,
-        password: _passwordController.text,
+  setState(() => _errorMessage = null);
+  if (!_formKey.currentState!.validate()) return;
+  setState(() => _isLoading = true);
+  try {
+    // 1 — Authenticate with Firebase
+    final credential = await _authService.signIn(
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+
+    // 2 — Get user data from Firestore
+    final uid = credential.user!.uid;
+    final userData = await FirestoreService().getUser(uid);
+    final username = userData?['username'] ?? 'User';
+
+    // 3 — Send OTP
+    final sent = await OtpService().sendOtp(
+      uid: uid,
+      email: _emailController.text.trim(),
+      username: username,
+    );
+
+    if (!mounted) return;
+
+    if (sent) {
+      // 4 — Navigate to verification
+      Navigator.pushNamed(
+        context,
+        '/verify',
+        arguments: {
+          'email': _emailController.text.trim(),
+          'username': username,
+          'isSignUp': false,
+        },
       );
-    } on FirebaseAuthException catch (e) {
-      setState(() => _errorMessage = _authService.getErrorMessage(e.code));
-    } finally {
-      if (mounted) setState(() => _isLoading = false);
+    } else {
+      setState(() => _errorMessage = 'Failed to send verification code. Check your connection.');
     }
+  } on FirebaseAuthException catch (e) {
+    setState(() => _errorMessage = _authService.getErrorMessage(e.code));
+  } finally {
+    if (mounted) setState(() => _isLoading = false);
   }
+}
 
   @override
   Widget build(BuildContext context) {
