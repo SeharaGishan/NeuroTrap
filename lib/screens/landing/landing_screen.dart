@@ -80,7 +80,7 @@ class _LandingScreenState extends State<LandingScreen>
                         scale: _logoScale,
                         child: Image.asset(
                           'assets/images/main-logo.png',
-                          width: size.width * 1.4,
+                          width: size.width * 0.88,
                         ),
                       ),
                     ),

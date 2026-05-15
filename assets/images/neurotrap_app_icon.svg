@@ -1,0 +1,61 @@
+<svg width="100%" viewBox="0 0 680 680" role="img" style="" xmlns="http://www.w3.org/2000/svg">
+  <title style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">NeuroTrap App Icon</title>
+  <desc style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">NeuroTrap AI honeypot system app icon — dark navy hexagon with neural network design</desc>
+
+  <defs>
+    <clipPath id="hex-clip">
+      <polygon points="340,40 600,190 600,490 340,640 80,490 80,190"/>
+    </clipPath>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#0A1628" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Hexagon background -->
+  <polygon points="340,40 600,190 600,490 340,640 80,490 80,190" fill="#0A1628" stroke="#00E5FF" stroke-width="4" style="fill:rgb(10, 22, 40);stroke:rgb(0, 229, 255);color:rgb(255, 255, 255);stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Subtle glow -->
+  <polygon points="340,40 600,190 600,490 340,640 80,490 80,190" fill="url(#glow)" clip-path="url(#hex-clip)" style="stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Outer hex ring accent -->
+  <polygon points="340,60 580,200 580,480 340,620 100,480 100,200" fill="none" stroke="#00E5FF" stroke-width="1" stroke-opacity="0.2" style="fill:none;stroke:rgb(0, 229, 255);color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Shield shape -->
+  <path d="M340,140 L460,190 L460,320 Q460,420 340,470 Q220,420 220,320 L220,190 Z" fill="#0D1F3C" stroke="#00E5FF" stroke-width="2.5" style="fill:rgb(13, 31, 60);stroke:rgb(0, 229, 255);color:rgb(255, 255, 255);stroke-width:2.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Neural network nodes -->
+  <!-- Top -->
+  <circle cx="340" cy="175" r="10" fill="#00E5FF" style="fill:rgb(0, 229, 255);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <!-- Mid left -->
+  <circle cx="260" cy="270" r="9" fill="#00E5FF" opacity="0.8" style="fill:rgb(0, 229, 255);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.8;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <!-- Mid right -->
+  <circle cx="420" cy="270" r="9" fill="#00E5FF" opacity="0.8" style="fill:rgb(0, 229, 255);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.8;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <!-- Center -->
+  <circle cx="340" cy="310" r="14" fill="#00E5FF" style="fill:rgb(0, 229, 255);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <!-- Lower left -->
+  <circle cx="275" cy="370" r="8" fill="#FF4400" opacity="0.9" style="fill:rgb(255, 68, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.9;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <!-- Lower right -->
+  <circle cx="405" cy="370" r="8" fill="#FF4400" opacity="0.9" style="fill:rgb(255, 68, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.9;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <!-- Bottom -->
+  <circle cx="340" cy="420" r="10" fill="#00E5FF" opacity="0.7" style="fill:rgb(0, 229, 255);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.7;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Neural connections -->
+  <line x1="340" y1="175" x2="260" y2="270" stroke="#00E5FF" stroke-width="1.5" opacity="0.5" style="fill:rgb(0, 0, 0);stroke:rgb(0, 229, 255);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.5;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="340" y1="175" x2="420" y2="270" stroke="#00E5FF" stroke-width="1.5" opacity="0.5" style="fill:rgb(0, 0, 0);stroke:rgb(0, 229, 255);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.5;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="260" y1="270" x2="340" y2="310" stroke="#00E5FF" stroke-width="2" opacity="0.7" style="fill:rgb(0, 0, 0);stroke:rgb(0, 229, 255);color:rgb(255, 255, 255);stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.7;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="420" y1="270" x2="340" y2="310" stroke="#00E5FF" stroke-width="2" opacity="0.7" style="fill:rgb(0, 0, 0);stroke:rgb(0, 229, 255);color:rgb(255, 255, 255);stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.7;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="340" y1="310" x2="275" y2="370" stroke="#FF4400" stroke-width="1.5" opacity="0.6" style="fill:rgb(0, 0, 0);stroke:rgb(255, 68, 0);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.6;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="340" y1="310" x2="405" y2="370" stroke="#FF4400" stroke-width="1.5" opacity="0.6" style="fill:rgb(0, 0, 0);stroke:rgb(255, 68, 0);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.6;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="275" y1="370" x2="340" y2="420" stroke="#00E5FF" stroke-width="1.5" opacity="0.5" style="fill:rgb(0, 0, 0);stroke:rgb(0, 229, 255);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.5;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="405" y1="370" x2="340" y2="420" stroke="#00E5FF" stroke-width="1.5" opacity="0.5" style="fill:rgb(0, 0, 0);stroke:rgb(0, 229, 255);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.5;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="260" y1="270" x2="275" y2="370" stroke="#00E5FF" stroke-width="1" opacity="0.3" style="fill:rgb(0, 0, 0);stroke:rgb(0, 229, 255);color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.3;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="420" y1="270" x2="405" y2="370" stroke="#00E5FF" stroke-width="1" opacity="0.3" style="fill:rgb(0, 0, 0);stroke:rgb(0, 229, 255);color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.3;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- NT text at bottom -->
+  <text x="340" y="530" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="38" font-weight="900" letter-spacing="4" fill="white" style="fill:rgb(255, 255, 255);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Arial Black&quot;, sans-serif;font-size:38px;font-weight:900;text-anchor:middle;dominant-baseline:auto">NEURO</text>
+  <text x="340" y="568" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="38" font-weight="900" letter-spacing="4" fill="#00E5FF" style="fill:rgb(0, 229, 255);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Arial Black&quot;, sans-serif;font-size:38px;font-weight:900;text-anchor:middle;dominant-baseline:auto">TRAP</text>
+
+  <!-- Corner hex accents -->
+  <polygon points="340,48 356,57 356,75 340,84 324,75 324,57" fill="none" stroke="#00E5FF" stroke-width="1.5" opacity="0.6" style="fill:none;stroke:rgb(0, 229, 255);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.6;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+</svg>

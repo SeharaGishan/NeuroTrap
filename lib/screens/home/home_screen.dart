@@ -9,7 +9,12 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
 import 'package:fl_chart/fl_chart.dart';
 import '../alerts/alerts_screen.dart';
+import '../about/about_screen.dart';
+import '../contacts/contacts_screen.dart';
+import '../license/license_screen.dart';
+
 import '../settings/settings_screen.dart';
+import '../../services/background_service.dart';
 
 const String _osBase       = 'http://10.0.2.20:9200';
 const String _sessionIndex = 'neurotrap-sessions';
@@ -30,7 +35,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   int _selectedIndex = 2;
 
   int _botCount = 0, _skCount = 0, _aptCount = 0;
@@ -51,19 +56,30 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _fetchData();
+    NeuroTrapBackgroundService.startService();
     _timer    = Timer.periodic(const Duration(seconds: 15), (_) => _fetchData());
     _vpnTimer = Timer.periodic(const Duration(seconds: 5),  (_) => _checkVpnAndReload());
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _timer?.cancel();
     _vpnTimer?.cancel();
     super.dispose();
   }
 
   // ── VPN auto-reconnect detection ──────────────────────────────────────────
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      debugPrint('[NT] App resumed — refreshing data');
+      _fetchData();
+    }
+  }
 
   Future<void> _checkVpnAndReload() async {
     final wasConnected = _connected;
@@ -190,7 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
       final s   = List.filled(24, 0.0);
       final a   = List.filled(24, 0.0);
       final lbl = List.generate(24, (i) =>
-          i % 3 == 0 ? i.toString().padLeft(2,'0') + 'h' : '');
+          i % 4 == 0 ? i.toString().padLeft(2,'0') + ':00' : '');
 
       for (final row in rows) {
         final ts  = row[0]?.toString();
@@ -394,6 +410,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Navigator.push(context,
       MaterialPageRoute(builder: (_) => const _ShutdownScreen()));
     try { await FirebaseMessaging.instance.deleteToken(); } catch (_) {}
+    await NeuroTrapBackgroundService.stopService();
     await Future.delayed(const Duration(seconds: 3));
     await FirebaseAuth.instance.signOut();
     if (mounted) Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false);
@@ -526,32 +543,55 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () {
               Navigator.pop(context);
               final label = item[1] as String;
+              if (label == 'Home') return;
               if (label == 'Alerts') Navigator.push(context,
                 MaterialPageRoute(builder: (_) => const AlertsScreen()));
               if (label == 'Settings') Navigator.push(context,
                 MaterialPageRoute(builder: (_) => const SettingsScreen()));
+              if (label == 'About') Navigator.push(context,
+                MaterialPageRoute(builder: (_) => const AboutScreen()));
+              if (label == 'Contacts') Navigator.push(context,
+                MaterialPageRoute(builder: (_) => const ContactsScreen()));
+              if (label == 'License & Agreements') Navigator.push(context,
+                MaterialPageRoute(builder: (_) => const LicenseScreen()));
             },
           )),
           const Spacer(),
           Padding(
             padding: const EdgeInsets.all(16),
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              decoration: BoxDecoration(
-                border: Border.all(color: _cyan.withValues(alpha: 0.5)),
-                borderRadius: BorderRadius.circular(10),
+            child: GestureDetector(
+              onTap: () async {
+                Navigator.pop(context);
+                try {
+                  await launchUrl(
+                    Uri.parse('http://10.0.2.20:3000/d/neurotrap-cowrie/neurotrap-e28094-live-attack-intelligence?orgId=1&from=now-7d&to=now&timezone=Asia%2FColombo&refresh=10s'),
+                    mode: LaunchMode.externalApplication,
+                  );
+                } catch (e) {
+                  debugPrint('Grafana: $e');
+                }
+              },
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                decoration: BoxDecoration(
+                  color: _cyan.withValues(alpha: 0.08),
+                  border: Border.all(color: _cyan.withValues(alpha: 0.5)),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.dashboard_rounded, color: _cyan, size: 18),
+                    SizedBox(width: 8),
+                    Text('View Grafana', style: TextStyle(
+                      color: _cyan, fontSize: 13,
+                      fontWeight: FontWeight.bold)),
+                  ]),
               ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.dashboard_rounded, color: _cyan, size: 18),
-                  SizedBox(width: 8),
-                  Text('View Grafana',
-                    style: TextStyle(color: _cyan, fontSize: 13)),
-                ]),
             ),
           ),
+
         ],
       )),
     );

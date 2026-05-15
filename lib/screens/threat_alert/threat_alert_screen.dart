@@ -33,27 +33,22 @@ class _ThreatAlertScreenState extends State<ThreatAlertScreen>
   late Animation<double>   _textAnim;
   bool _isPaused = false;
   final AudioPlayer _player = AudioPlayer();
-
-  // Use HapticFeedback for alarm effect (works without audio files)
   bool _vibratingActive = false;
 
   @override
   void initState() {
     super.initState();
-
     _pulseCtrl = AnimationController(
       vsync: this, duration: const Duration(milliseconds: 700))
       ..repeat(reverse: true);
     _pulseAnim = Tween<double>(begin: 0.92, end: 1.06).animate(
       CurvedAnimation(parent: _pulseCtrl, curve: Curves.easeInOut));
-
     _textCtrl = AnimationController(
       vsync: this, duration: const Duration(milliseconds: 500))
       ..repeat(reverse: true);
     _textAnim = Tween<double>(begin: 0.3, end: 1.0).animate(
       CurvedAnimation(parent: _textCtrl, curve: Curves.easeInOut));
-
-    _startVibration();
+    _startAlarm();
   }
 
   Future<void> _startAlarm() async {
@@ -61,7 +56,6 @@ class _ThreatAlertScreenState extends State<ThreatAlertScreen>
       await _player.setReleaseMode(ReleaseMode.loop);
       await _player.play(AssetSource('audio/alarm.mp3'));
     } catch (_) {}
-    // Also vibrate
     _vibratingActive = true;
     _vibrateLoop();
   }
@@ -71,10 +65,6 @@ class _ThreatAlertScreenState extends State<ThreatAlertScreen>
       HapticFeedback.heavyImpact();
       await Future.delayed(const Duration(milliseconds: 600));
     }
-  }
-
-  Future<void> _startVibration() async {
-    await _startAlarm();
   }
 
   void _togglePause() {
@@ -88,21 +78,21 @@ class _ThreatAlertScreenState extends State<ThreatAlertScreen>
       _pulseCtrl.repeat(reverse: true);
       _textCtrl.repeat(reverse: true);
       _player.resume();
-      _startVibration();
+      _vibratingActive = true;
+      _vibrateLoop();
     }
   }
 
   void _openNeuroTrap() {
     _vibratingActive = false;
-    _player.stop();
+    try { _player.stop(); } catch (_) {}
     Navigator.of(context).pushNamedAndRemoveUntil('/home', (r) => false);
   }
 
   @override
   void dispose() {
     _vibratingActive = false;
-    _player.stop();
-    _player.dispose();
+    try { _player.stop(); _player.dispose(); } catch (_) {}
     _pulseCtrl.dispose();
     _textCtrl.dispose();
     super.dispose();
@@ -125,7 +115,6 @@ class _ThreatAlertScreenState extends State<ThreatAlertScreen>
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(children: [
-        // Pulsing background
         Positioned.fill(
           child: AnimatedBuilder(
             animation: _pulseAnim,
@@ -137,26 +126,17 @@ class _ThreatAlertScreenState extends State<ThreatAlertScreen>
         SafeArea(
           child: Column(children: [
             const Spacer(flex: 2),
-
-            // Logo
             Image.asset('assets/images/logo.png', height: 60,
-              errorBuilder: (_, __, ___) => Column(children: [
-                RichText(text: const TextSpan(children: [
+              errorBuilder: (_, __, ___) => RichText(
+                text: const TextSpan(children: [
                   TextSpan(text: 'NEURO', style: TextStyle(
                     color: Colors.white, fontWeight: FontWeight.w900,
                     fontSize: 20, letterSpacing: 3)),
                   TextSpan(text: 'TRAP', style: TextStyle(
                     color: Color(0xFF00E5FF), fontWeight: FontWeight.w900,
                     fontSize: 20, letterSpacing: 3)),
-                ])),
-                const Text('SECURITY THAT EVOLVES',
-                  style: TextStyle(color: Colors.white38, fontSize: 7, letterSpacing: 2)),
-              ]),
-            ),
-
+                ]))),
             const Spacer(flex: 1),
-
-            // THREAT ALERT text
             AnimatedBuilder(
               animation: _textAnim,
               builder: (_, __) => Opacity(
@@ -171,10 +151,7 @@ class _ThreatAlertScreenState extends State<ThreatAlertScreen>
                   )),
               ),
             ),
-
             const SizedBox(height: 20),
-
-            // Classification
             RichText(text: TextSpan(children: [
               const TextSpan(text: 'Classification :  ',
                 style: TextStyle(color: Colors.white70, fontSize: 15,
@@ -183,30 +160,23 @@ class _ThreatAlertScreenState extends State<ThreatAlertScreen>
                 style: TextStyle(color: _alertColor, fontSize: 15,
                   fontWeight: FontWeight.bold)),
             ])),
-
             if (widget.sourceIp != '--') ...[
               const SizedBox(height: 10),
               Text('Source: ${widget.sourceIp}',
                 style: const TextStyle(color: Colors.white38, fontSize: 12)),
             ],
-
             if (widget.confidence > 0) ...[
               const SizedBox(height: 4),
-              Text(
-                'Confidence: ${(widget.confidence * 100).toStringAsFixed(1)}%',
+              Text('Confidence: ${(widget.confidence * 100).toStringAsFixed(1)}%',
                 style: const TextStyle(color: Colors.white38, fontSize: 12)),
             ],
-
             if (widget.dqnAction != '--') ...[
               const SizedBox(height: 4),
               Text('Action: ${widget.dqnAction.replaceAll('_', ' ')}',
                 style: TextStyle(
                   color: _cyan.withValues(alpha: 0.7), fontSize: 12)),
             ],
-
             const Spacer(flex: 2),
-
-            // Pause button
             AnimatedBuilder(
               animation: _pulseAnim,
               builder: (_, __) => Transform.scale(
@@ -235,10 +205,7 @@ class _ThreatAlertScreenState extends State<ThreatAlertScreen>
                 ),
               ),
             ),
-
             const Spacer(flex: 2),
-
-            // Open NeuroTrap button
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: GestureDetector(
@@ -258,7 +225,6 @@ class _ThreatAlertScreenState extends State<ThreatAlertScreen>
                 ),
               ),
             ),
-
             const SizedBox(height: 40),
           ]),
         ),
