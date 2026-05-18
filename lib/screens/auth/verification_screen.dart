@@ -97,8 +97,12 @@ class _VerificationScreenState extends State<VerificationScreen>
 
   @override
   void dispose() {
-    for (final c in _controllers) c.dispose();
-    for (final f in _focusNodes) f.dispose();
+    for (final c in _controllers) {
+      c.dispose();
+    }
+    for (final f in _focusNodes) {
+      f.dispose();
+    }
     _timer?.cancel();
     _animController.dispose();
     super.dispose();
@@ -151,7 +155,9 @@ class _VerificationScreenState extends State<VerificationScreen>
         _errorMessage = result.message;
         // Clear the boxes on wrong code
         if (result == OtpResult.wrong || result == OtpResult.expired) {
-          for (final c in _controllers) c.clear();
+          for (final c in _controllers) {
+            c.clear();
+          }
           _focusNodes[0].requestFocus();
         }
       });
@@ -177,7 +183,9 @@ class _VerificationScreenState extends State<VerificationScreen>
     setState(() => _isResending = false);
 
     if (sent) {
-      for (final c in _controllers) c.clear();
+      for (final c in _controllers) {
+        c.clear();
+      }
       _focusNodes[0].requestFocus();
       _startResendTimer();
     } else {

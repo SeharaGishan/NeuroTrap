@@ -28,7 +28,7 @@ class SettingsScreen extends StatelessWidget {
                     color: _white, size: 20)),
                 const Spacer(),
                 Image.asset('assets/images/logo.png', height: 32,
-                  errorBuilder: (_, __, ___) => const Text('NEUROTRAP',
+                  errorBuilder: (_, _, _) => const Text('NEUROTRAP',
                     style: TextStyle(color: _white,
                       fontWeight: FontWeight.w900, fontSize: 16))),
                 const Spacer(),

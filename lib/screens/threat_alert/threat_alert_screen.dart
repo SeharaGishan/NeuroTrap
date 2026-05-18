@@ -118,7 +118,7 @@ class _ThreatAlertScreenState extends State<ThreatAlertScreen>
         Positioned.fill(
           child: AnimatedBuilder(
             animation: _pulseAnim,
-            builder: (_, __) => Container(
+            builder: (_, _) => Container(
               color: _alertColor.withValues(
                 alpha: _isPaused ? 0.04 : 0.07 * _pulseAnim.value)),
           ),
@@ -127,7 +127,7 @@ class _ThreatAlertScreenState extends State<ThreatAlertScreen>
           child: Column(children: [
             const Spacer(flex: 2),
             Image.asset('assets/images/logo.png', height: 60,
-              errorBuilder: (_, __, ___) => RichText(
+              errorBuilder: (_, _, _) => RichText(
                 text: const TextSpan(children: [
                   TextSpan(text: 'NEURO', style: TextStyle(
                     color: Colors.white, fontWeight: FontWeight.w900,
@@ -139,7 +139,7 @@ class _ThreatAlertScreenState extends State<ThreatAlertScreen>
             const Spacer(flex: 1),
             AnimatedBuilder(
               animation: _textAnim,
-              builder: (_, __) => Opacity(
+              builder: (_, _) => Opacity(
                 opacity: _isPaused ? 1.0 : _textAnim.value,
                 child: Text('THREAT ALERT!',
                   style: TextStyle(
@@ -179,7 +179,7 @@ class _ThreatAlertScreenState extends State<ThreatAlertScreen>
             const Spacer(flex: 2),
             AnimatedBuilder(
               animation: _pulseAnim,
-              builder: (_, __) => Transform.scale(
+              builder: (_, _) => Transform.scale(
                 scale: _isPaused ? 1.0 : _pulseAnim.value,
                 child: GestureDetector(
                   onTap: _togglePause,

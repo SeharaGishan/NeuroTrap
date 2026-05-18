@@ -98,16 +98,20 @@ class NeuroTrapBottomNav extends StatelessWidget {
     switch (i) {
       case 0: _confirmSignOut(context); break;
       case 1:
-        if (selectedIndex != 1) Navigator.push(context,
+        if (selectedIndex != 1) {
+          Navigator.push(context,
           MaterialPageRoute(builder: (_) => const AlertsScreen()));
+        }
         break;
       case 2:
         Navigator.pushNamedAndRemoveUntil(
           context, '/home', (r) => false);
         break;
       case 3:
-        if (selectedIndex != 3) Navigator.push(context,
+        if (selectedIndex != 3) {
+          Navigator.push(context,
           MaterialPageRoute(builder: (_) => const SettingsScreen()));
+        }
         break;
       case 4: _handleShutdown(context); break;
     }
@@ -211,7 +215,7 @@ class _ShutdownAnimState extends State<_ShutdownAnim>
             fontSize: 16, letterSpacing: 2)),
         const SizedBox(height: 60),
         Image.asset('assets/images/logo.png', height: 44,
-          errorBuilder: (_, __, ___) => const Text('NEUROTRAP',
+          errorBuilder: (_, _, _) => const Text('NEUROTRAP',
             style: TextStyle(color: Colors.white,
               fontWeight: FontWeight.w900, fontSize: 20))),
         const SizedBox(height: 8),

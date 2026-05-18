@@ -278,7 +278,7 @@ class _VpnScreenState extends State<VpnScreen>
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
             child: Center(
               child: Image.asset('assets/images/logo.png', height: 40,
-                errorBuilder: (_, __, ___) => RichText(
+                errorBuilder: (_, _, _) => RichText(
                   text: const TextSpan(children: [
                     TextSpan(text: 'NEURO', style: TextStyle(color: _white,
                       fontWeight: FontWeight.w900, fontSize: 20, letterSpacing: 2)),
@@ -294,7 +294,7 @@ class _VpnScreenState extends State<VpnScreen>
             animation: !_vpnConnected
                 ? _pulse
                 : const AlwaysStoppedAnimation(1.0),
-            builder: (_, __) => Transform.scale(
+            builder: (_, _) => Transform.scale(
               scale: !_vpnConnected ? _pulse.value : 1.0,
               child: Container(
                 width: 130, height: 130,

@@ -24,7 +24,7 @@ class NeuroTrapTopBar extends StatelessWidget {
         Center(
           child: Image.asset('assets/images/logo.png', height: 52,
             fit: BoxFit.contain,
-            errorBuilder: (_, __, ___) => Column(children: [
+            errorBuilder: (_, _, _) => Column(children: [
               RichText(text: const TextSpan(children: [
                 TextSpan(text: 'NEURO', style: TextStyle(
                   color: _white, fontWeight: FontWeight.w900,

@@ -70,14 +70,18 @@ class _AlertsScreenState extends State<AlertsScreen>
         final schema = data['schema'] as List;
         final rows   = data['datarows'] as List;
         final keys   = schema.map((s) => s['name'].toString()).toList();
-        if (mounted) setState(() {
+        if (mounted) {
+          setState(() {
           _sessions = rows.map((row) {
             final m = <String, dynamic>{};
-            for (int i = 0; i < keys.length; i++) m[keys[i]] = row[i];
+            for (int i = 0; i < keys.length; i++) {
+              m[keys[i]] = row[i];
+            }
             return m;
           }).toList();
           _loading = false;
         });
+        }
       }
     } catch (_) {
       if (mounted) setState(() => _loading = false);
@@ -115,14 +119,10 @@ class _AlertsScreenState extends State<AlertsScreen>
   String _formatTime(String? ts) {
     if (ts == null || ts.isEmpty) return '--';
     try {
-      final cleaned = ts.trim().replaceFirst(' ', 'T').split('.')[0] + 'Z';
+      final cleaned = '${ts.trim().replaceFirst(' ', 'T').split('.')[0]}Z';
       final utc = DateTime.parse(cleaned);
       final slt = utc.add(const Duration(hours: 5, minutes: 30));
-      return slt.day.toString().padLeft(2,'0') + '-' +
-             slt.month.toString().padLeft(2,'0') + '-' +
-             slt.year.toString() + '  ' +
-             slt.hour.toString().padLeft(2,'0') + ':' +
-             slt.minute.toString().padLeft(2,'0');
+      return '${slt.day.toString().padLeft(2,'0')}-${slt.month.toString().padLeft(2,'0')}-${slt.year}  ${slt.hour.toString().padLeft(2,'0')}:${slt.minute.toString().padLeft(2,'0')}';
     } catch (_) {
       return ts.length > 16 ? ts.substring(0, 16) : ts;
     }
@@ -251,7 +251,7 @@ class _AlertsScreenState extends State<AlertsScreen>
         child: const Icon(Icons.arrow_back_ios, color: _white, size: 20)),
       const Spacer(),
       Image.asset('assets/images/logo.png', height: 32,
-        errorBuilder: (_, __, ___) => RichText(
+        errorBuilder: (_, _, _) => RichText(
           text: const TextSpan(children: [
             TextSpan(text: 'NEURO', style: TextStyle(
               color: _white, fontWeight: FontWeight.w900,

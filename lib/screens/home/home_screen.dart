@@ -151,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     final h  = u.hour.toString().padLeft(2,'0');
     final mi = u.minute.toString().padLeft(2,'0');
     final s  = u.second.toString().padLeft(2,'0');
-    return y + '-' + mo + '-' + d + ' ' + h + ':' + mi + ':' + s;
+    return '$y-$mo-$d $h:$mi:$s';
   }
 
   Future<void> _fetchCounts() async {
@@ -164,11 +164,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           ' | stats count() as cnt';
       return _ppl(q);
     }));
-    if (mounted) setState(() {
+    if (mounted) {
+      setState(() {
       _botCount = _count(results[0]);
       _skCount  = _count(results[1]);
       _aptCount = _count(results[2]);
     });
+    }
   }
 
   Future<void> _fetchLastEvent() async {
@@ -206,14 +208,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       final s   = List.filled(24, 0.0);
       final a   = List.filled(24, 0.0);
       final lbl = List.generate(24, (i) =>
-          i % 4 == 0 ? i.toString().padLeft(2,'0') + ':00' : '');
+          i % 4 == 0 ? '${i.toString().padLeft(2,'0')}:00' : '');
 
       for (final row in rows) {
         final ts  = row[0]?.toString();
         final cls = row[1]?.toString() ?? '';
         if (ts == null) continue;
         try {
-          final cleaned = ts.trim().replaceFirst(' ','T').split('.')[0] + 'Z';
+          final cleaned = '${ts.trim().replaceFirst(' ','T').split('.')[0]}Z';
           final utc     = DateTime.parse(cleaned);
           final slt     = _toSLT(utc);
           final hour    = slt.hour;
@@ -224,9 +226,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         } catch (_) {}
       }
 
-      if (mounted) setState(() {
+      if (mounted) {
+        setState(() {
         _botSeries = b; _skSeries = s; _aptSeries = a; _dayLabels = lbl;
       });
+      }
       return;
     }
 
@@ -257,7 +261,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       final cls = row[1]?.toString() ?? '';
       if (ts == null) continue;
       try {
-        final cleaned  = ts.trim().replaceFirst(' ','T').split('.')[0] + 'Z';
+        final cleaned  = '${ts.trim().replaceFirst(' ','T').split('.')[0]}Z';
         final utc      = DateTime.parse(cleaned);
         final diffDays = now.difference(utc).inDays;
         if (diffDays >= days) continue;
@@ -269,9 +273,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       } catch (_) {}
     }
 
-    if (mounted) setState(() {
+    if (mounted) {
+      setState(() {
       _botSeries = b; _skSeries = s; _aptSeries = a; _dayLabels = lbl;
     });
+    }
   }
 
   Future<void> _fetchDeceptionActions() async {
@@ -285,7 +291,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       setState(() {
         _deceptionActions = rows.map((row) {
           final m = <String, dynamic>{};
-          for (int i = 0; i < keys.length; i++) m[keys[i]] = row[i];
+          for (int i = 0; i < keys.length; i++) {
+            m[keys[i]] = row[i];
+          }
           return m;
         }).toList();
       });
@@ -354,13 +362,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   String _fmtTime(String? ts) {
     if (ts == null || ts.isEmpty) return '--';
     try {
-      final cleaned = ts.trim().replaceFirst(' ', 'T').split('.')[0] + 'Z';
+      final cleaned = '${ts.trim().replaceFirst(' ', 'T').split('.')[0]}Z';
       final utc = DateTime.parse(cleaned);
       final slt = utc.add(const Duration(hours: 5, minutes: 30));
-      return slt.day.toString().padLeft(2,'0') + '-' +
-             slt.month.toString().padLeft(2,'0') + ' ' +
-             slt.hour.toString().padLeft(2,'0') + ':' +
-             slt.minute.toString().padLeft(2,'0');
+      return '${slt.day.toString().padLeft(2,'0')}-${slt.month.toString().padLeft(2,'0')} ${slt.hour.toString().padLeft(2,'0')}:${slt.minute.toString().padLeft(2,'0')}';
     } catch (e) {
       return ts;
     }
@@ -524,7 +529,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 8),
             child: Image.asset('assets/images/logo.png', height: 36,
-              errorBuilder: (_, __, ___) => RichText(
+              errorBuilder: (_, _, _) => RichText(
                 text: const TextSpan(children: [
                   TextSpan(text: 'NEURO', style: TextStyle(
                     color: _white, fontWeight: FontWeight.w900,
@@ -543,16 +548,26 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               Navigator.pop(context);
               final label = item[1] as String;
               if (label == 'Home') return;
-              if (label == 'Alerts') Navigator.push(context,
+              if (label == 'Alerts') {
+                Navigator.push(context,
                 MaterialPageRoute(builder: (_) => const AlertsScreen()));
-              if (label == 'Settings') Navigator.push(context,
+              }
+              if (label == 'Settings') {
+                Navigator.push(context,
                 MaterialPageRoute(builder: (_) => const SettingsScreen()));
-              if (label == 'About') Navigator.push(context,
+              }
+              if (label == 'About') {
+                Navigator.push(context,
                 MaterialPageRoute(builder: (_) => const AboutScreen()));
-              if (label == 'Contacts') Navigator.push(context,
+              }
+              if (label == 'Contacts') {
+                Navigator.push(context,
                 MaterialPageRoute(builder: (_) => const ContactsScreen()));
-              if (label == 'License & Agreements') Navigator.push(context,
+              }
+              if (label == 'License & Agreements') {
+                Navigator.push(context,
                 MaterialPageRoute(builder: (_) => const LicenseScreen()));
+              }
             },
           )),
           const Spacer(),
@@ -613,7 +628,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     Center(
       child: Image.asset('assets/images/logo.png', height: 56,
         fit: BoxFit.contain,
-        errorBuilder: (_, __, ___) => RichText(
+        errorBuilder: (_, _, _) => RichText(
           text: const TextSpan(children: [
             TextSpan(text: 'NEURO', style: TextStyle(
               color: _white, fontWeight: FontWeight.w900,
@@ -952,8 +967,10 @@ class _GrafanaChartState extends State<_GrafanaChart> {
   @override
   Widget build(BuildContext context) {
     final count = widget.labels.length;
-    if (count < 2) return const Center(
+    if (count < 2) {
+      return const Center(
       child: Text('No data', style: TextStyle(color: Colors.white38, fontSize: 12)));
+    }
 
     return Column(children: [
       // Tooltip row
@@ -1191,7 +1208,7 @@ class _ShutdownScreenState extends State<_ShutdownScreen>
               fontSize: 16, letterSpacing: 2)),
           const SizedBox(height: 60),
           Image.asset('assets/images/logo.png', height: 44,
-            errorBuilder: (_, __, ___) => RichText(
+            errorBuilder: (_, _, _) => RichText(
               text: const TextSpan(children: [
                 TextSpan(text: 'NEURO', style: TextStyle(
                   color: Colors.white, fontWeight: FontWeight.w900,
