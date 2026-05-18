@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 const Color _navy    = Color(0xFF0D1F3C);
 const Color _cyan    = Color(0xFF00E5FF);
@@ -13,6 +14,18 @@ class NeuroTrapTopBar extends StatelessWidget {
     required this.parentContext,
     this.showBack = true,
   });
+
+  String _greeting() {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return 'Hi';
+    if (user.displayName != null && user.displayName!.isNotEmpty) {
+      return 'Hi ' + user.displayName!.split(' ').first;
+    }
+    final email = user.email ?? '';
+    final name = email.split('@').first;
+    if (name.isEmpty) return 'Hi';
+    return 'Hi ' + name[0].toUpperCase() + name.substring(1);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +61,7 @@ class NeuroTrapTopBar extends StatelessWidget {
           else
             const SizedBox(width: 20),
           const Spacer(),
-          const Text('Hi Sehara',
+          Text(_greeting(),
             style: TextStyle(color: _white, fontSize: 13,
               fontWeight: FontWeight.w500)),
         ]),

@@ -71,6 +71,19 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     super.dispose();
   }
 
+  String _getGreeting() {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return 'Hi';
+    if (user.displayName != null && user.displayName!.isNotEmpty) {
+      return 'Hi ' + user.displayName!.split(' ').first;
+    }
+    final email = user.email ?? '';
+    final name = email.split('@').first;
+    if (name.isEmpty) return 'Hi';
+    return 'Hi ' + name[0].toUpperCase() + name.substring(1);
+  }
+
+
   // ── VPN auto-reconnect detection ──────────────────────────────────────────
 
   @override
@@ -620,7 +633,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           child: const Icon(Icons.menu, color: _white, size: 26),
         )),
         const Spacer(),
-        const Text('Hi Sehara',
+        Text(_getGreeting(),
           style: TextStyle(color: _white, fontSize: 13,
             fontWeight: FontWeight.w500)),
       ]),
