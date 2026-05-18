@@ -45,7 +45,12 @@ class _AlertsScreenState extends State<AlertsScreen>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) _fetchSessions();
+    if (state == AppLifecycleState.resumed) {
+      _timer?.cancel();
+      _fetchSessions();
+      _timer = Timer.periodic(
+        const Duration(seconds: 15), (_) => _fetchSessions());
+    }
   }
 
   Future<void> _fetchSessions() async {
